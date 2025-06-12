@@ -1,7 +1,9 @@
-[
-  "Aasiqi2",
-  "cs",
-  "houseful5",
-  "ncs",
-  "younggoat"
-]
+{
+    "albums": [
+        "Aasiqi2",
+        "cs",
+        "houseful5",
+        "ncs",
+        "younggoat"
+    ]
+}
