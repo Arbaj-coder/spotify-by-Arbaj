@@ -12,7 +12,9 @@ function secondsToMinutesSeconds(seconds) {
 async function getsongs(folder) {
     currFolder = folder;
 
-    const response = await fetch(`/${folder}/info.json`);
+    console.log("Trying fetch:", `/${folder}/info.json`);
+
+    const response = await fetch(`${folder}/info.json`);
     if (!response.ok) {
         console.error("Failed to fetch info.json", response.statusText);
         return;
@@ -64,10 +66,13 @@ function playmusic(track, pause = false) {
 
 async function displayAlbums() {
     let folders = ["houseful5", "ncs"]; // <-- manually add folder names
+   
+console.log("Trying fetch in displayAlbum:");
+
 
     let cardContainer = document.querySelector(".cardContainer");
     for (let folder of folders) {
-        let res = await fetch(`/songs/${folder}/info.json`);
+        let res = await fetch(`songs/${folder}/info.json`);
         let data = await res.json();
         cardContainer.innerHTML += `
             <div data-folder="songs/${folder}" class="card">
@@ -76,7 +81,7 @@ async function displayAlbums() {
                         <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5" stroke-linejoin="round" />
                     </svg>
                 </div>
-                <img src="/songs/${folder}/cover.jpg" alt="">
+                <img src="songs/${folder}/cover.jpg" alt="">
                 <h2>${data.title}</h2>
                 <p>${data.description}</p>
             </div>`;
