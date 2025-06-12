@@ -2,6 +2,9 @@ let currsong = new Audio();
 let currFolder;
 let song = [];
 
+const BASE_PATH = "/spotify-by-Arbaj";  // Add this only for GitHub Pages
+
+
 function secondsToMinutesSeconds(seconds) {
     if (isNaN(seconds) || seconds < 0) return "00:00";
     const minutes = Math.floor(seconds / 60);
@@ -14,7 +17,7 @@ async function getsongs(folder) {
 
     console.log("Trying fetch:", `/${folder}/info.json`);
 
-    const response = await fetch(`${folder}/info.json`);
+    const response = await fetch(`${BASE_PATH}/${folder}/info.json`);
     if (!response.ok) {
         console.error("Failed to fetch info.json", response.statusText);
         return;
@@ -54,7 +57,8 @@ async function getsongs(folder) {
 
 function playmusic(track, pause = false) {
     const encodedTrack = encodeURIComponent(track);
-    currsong.src = `/${currFolder}/${encodedTrack}`;
+    currsong.src = `${BASE_PATH}/${currFolder}/${encodedTrack}`;
+
 
     if (!pause) currsong.play();
 
@@ -72,7 +76,8 @@ console.log("Trying fetch in displayAlbum:");
 
     let cardContainer = document.querySelector(".cardContainer");
     for (let folder of folders) {
-        let res = await fetch(`songs/${folder}/info.json`);
+        let res = await fetch(`${BASE_PATH}/songs/${folder}/info.json`);
+
         let data = await res.json();
         cardContainer.innerHTML += `
             <div data-folder="songs/${folder}" class="card">
@@ -81,7 +86,8 @@ console.log("Trying fetch in displayAlbum:");
                         <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5" stroke-linejoin="round" />
                     </svg>
                 </div>
-                <img src="songs/${folder}/cover.jpg" alt="">
+                <img src="${BASE_PATH}/songs/${folder}/cover.jpg" alt="">
+
                 <h2>${data.title}</h2>
                 <p>${data.description}</p>
             </div>`;
