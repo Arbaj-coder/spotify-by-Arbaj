@@ -22,45 +22,42 @@ function secondsToMinutesSeconds(seconds) {
 async function getsongs(folder) {
     currFolder = folder;
 
-    // http://127.0.0.1:3000
+    let res = await fetch(`/${folder}/info.json`);
+    let data = await res.json();
 
-    let a = await fetch(`/spotify-by-Arbaj/${folder}/`)
-    let response = await a.text();
-    let div = document.createElement("div")
-    div.innerHTML = response
-    let as = div.getElementsByTagName("a")
-    let songs = []
-    for (let index = 0; index < as.length; index++) {
-        let href = as[index].href;
-        if (href.endsWith(".mp3")) {
-            songs.push(href.split(`/${folder}/`)[1]);
-        }
+    let songs = data.tracks;
+
+    let songUL = document.querySelector(".songList ul");
+    songUL.innerHTML = "";
+
+    for (const song of songs) {
+        songUL.innerHTML += `
+            <li>
+                <img class="invert" width="34" src="assest/music.svg" alt="">
+                <div class="info">
+                    <div>${song.replaceAll("%20", " ")}</div>
+                    <div>Arbaj</div>
+                </div>
+                <div class="playnow">
+                    <span>Play Now</span>
+                    <img class="invert" src="assest/play.svg" alt="">
+                </div>
+            </li>`;
     }
-        let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0]
-        songUL.innerHTML = ""    
-        for (const song of songs) {
-        songUL.innerHTML += `<li><img class="invert" width="34" src="assest/music.svg" alt="">
-                                 <div class="info">
-                                <div>${song.replaceAll("%20" , " ")}</div>
-                                <div>Arbaj</div>
-                            </div>
-                            <div class="playnow">
-                                <span>Play Now</span>
-                                <img class="invert" src="assest/play.svg" alt="">
-                            </div> </li>`
-    }
-    
-    Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach((e)=>{
-        e.addEventListener('click' , ()=>{
-            playmusic(e.querySelector(".info").firstElementChild.innerHTML)
-        })
-    })
+
+    // Attach click listeners
+    Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach((e) => {
+        e.addEventListener("click", () => {
+            playmusic(e.querySelector(".info").firstElementChild.innerHTML);
+        });
+    });
+
     return songs;
 }
 
 const playmusic = (track , pause = false)=>{
 //    let audio = new Audio("/songs/"+ track)
-   currsong.src = "/spotify-by-Arbaj/" + `/${currFolder}/`+ track;
+   currsong.src = `/${currFolder}/`+ track;
    if(!pause){
        currsong.play()
    }
@@ -73,8 +70,8 @@ const playmusic = (track , pause = false)=>{
 
 async function displayAlbums() {
     console.log("displaying albums")
-    let a = await fetch(`/spotify-by-Arbaj/songs/`)
-    let response = await a.text();
+let a = await fetch(`/songs/${folder}/info.json`)
+let response = await a.json(); 
     let div = document.createElement("div")
     div.innerHTML = response;
     let anchors = div.getElementsByTagName("a")
@@ -85,7 +82,7 @@ async function displayAlbums() {
         if (e.href.includes("/songs") && !e.href.includes(".htaccess")) {
             let folder = e.href.split("/").slice(-2)[0]
             // Get the metadata of the folder
-            let a = await fetch(`/spotify-by-Arbaj/songs/${folder}/info.json`)
+            let a = await fetch(`/songs/${folder}/info.json`)
             let response = await a.json(); 
             cardContainer.innerHTML = cardContainer.innerHTML + ` <div data-folder="${folder}" class="card">
             <div class="play">
@@ -96,7 +93,7 @@ async function displayAlbums() {
                 </svg>
             </div>
 
-            <img src="/spotify-by-Arbaj/songs/${folder}/cover.jpg" alt="">
+            <img src="/songs/${folder}/cover.jpg" alt="">
             <h2>${response.title}</h2>
             <p>${response.description}</p>
         </div>`
