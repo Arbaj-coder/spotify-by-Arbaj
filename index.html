@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-primary">
+            <img class="invert hamburger" src="assest/hamburgar.svg" alt="">
+
+            <svg class="logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img"
+                aria-label="Spotify Logo">
+                <title>Spotify</title>
+                <path fill="white"
+                    d="M13.427.01C6.805-.253 1.224 4.902.961 11.524.698 18.147 5.853 23.728 12.476 23.99c6.622.263 12.203-4.892 12.466-11.514S20.049.272 13.427.01m5.066 17.579a.717.717 0 0 1-.977.268 14.4 14.4 0 0 0-5.138-1.747 14.4 14.4 0 0 0-5.42.263.717.717 0 0 1-.338-1.392c1.95-.474 3.955-.571 5.958-.29 2.003.282 3.903.928 5.647 1.92a.717.717 0 0 1 .268.978m1.577-3.15a.93.93 0 0 1-1.262.376 17.7 17.7 0 0 0-5.972-1.96 17.7 17.7 0 0 0-6.281.238.93.93 0 0 1-1.11-.71.93.93 0 0 1 .71-1.11 19.5 19.5 0 0 1 6.94-.262 19.5 19.5 0 0 1 6.599 2.165c.452.245.62.81.376 1.263m1.748-3.551a1.147 1.147 0 0 1-1.546.488 21.4 21.4 0 0 0-6.918-2.208 21.4 21.4 0 0 0-7.259.215 1.146 1.146 0 0 1-.456-2.246 23.7 23.7 0 0 1 8.034-.24 23.7 23.7 0 0 1 7.657 2.445c.561.292.78.984.488 1.546" />
+            </svg>
+            <div class="nav-left">
+                <button class="home-btn" aria-label="Home">
+                    <img src="assest/home1.svg" alt="" class="icon-home">
+                </button>
+                <div class="search-bar">
+                    <div class="search-bar-inner">
+                        <img src="assest/search2.svg" alt="Search Icon" class="icon-search">
+                        <input type="text" placeholder="What do you want to find?" class="search-input"
+                            aria-label="Search for songs, artists, or playlists">
+                        <div class="search-hover">
+                            <span class="search-hover-btn">Ctrl</span>
+                            <span class="search-hover-btn">Space</span>
+                        </div>
+                    </div>
+                    <button class="search-bar-options" aria-label="Browse">
+                        <img src="assest/browser1.svg" alt="" class="icon-browse">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="nav-secondary">
+            <button class="b-btn">Premium</button>
+            <button class="b-btn">Support</button>
+            <button class="b-btn">Download</button>
+            <span class="separator"><img src="assest/tally-1.png" alt="" class="icon-separator"></span>
+            <a class="nav-link del" href="#">
+                <img src="assest/download1.svg" alt="" class="icon-install"> Install App
+            </a>
+            <a class="nav-link del" href="#">Sign Up</a>
+            <a class="nav-link login-btn" href="#">Log In</a>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="left-content">
+            <div class="heading">
+                <h2>Your Library</h2>
+                <div class="close">
+                    <img class="invert" src="assest/close.svg" alt="">
+                </div>
+            </div>
+            <div class="songList">
+                <ul>
+
+                </ul>
+            </div>
+            <div class="left-end">
+                <div class="left-footer">
+                    <a href="https://www.spotify.com/in-en/legal/">Legal</a>
+                    <a href="https://www.spotify.com/in-en/safetyandprivacy/">Safety & Privacy Center</a>
+                    <a href="https://www.spotify.com/in-en/legal/privacy-policy/">Privacy Policy</a>
+                    <a href="https://www.spotify.com/in-en/legal/cookies-policy/">Cookies</a>
+                    <a href="https://www.spotify.com/in-en/legal/privacy-policy/#s3">About Ads</a>
+                    <a href="https://www.spotify.com/in-en/accessibility/">Accessibility</a>
+                </div>
+                <div class="language-selector">
+                    <button aria-label="Select Language: English">
+                        <span>
+                            <svg class="icon-language invert" viewBox="0 0 16 16" aria-hidden="true">
+                                <path
+                                    d="M8.152 16H8a8 8 0 1 1 .152 0zm-.41-14.202c-.226.273-.463.713-.677 1.323-.369 1.055-.626 2.496-.687 4.129h3.547c-.06-1.633-.318-3.074-.687-4.129-.213-.61-.45-1.05-.676-1.323-.194-.235-.326-.285-.385-.296h-.044c-.055.007-.19.052-.391.296zM4.877 7.25c.062-1.771.34-3.386.773-4.624.099-.284.208-.554.329-.806a6.507 6.507 0 0 0-4.436 5.43h3.334zm-3.334 1.5a6.507 6.507 0 0 0 4.436 5.43 7.974 7.974 0 0 1-.33-.806c-.433-1.238-.71-2.853-.772-4.624H1.543zm4.835 0c.061 1.633.318 3.074.687 4.129.214.61.451 1.05.677 1.323.202.244.336.29.391.297l.044-.001c.06-.01.19-.061.385-.296.226-.273.463-.713.676-1.323.37-1.055.626-2.496.687-4.129H6.378zm5.048 0c-.061 1.771-.339 3.386-.772 4.624-.082.235-.171.46-.268.674a6.506 6.506 0 0 0 4.071-5.298h-3.03zm3.031-1.5a6.507 6.507 0 0 0-4.071-5.298c.097.214.186.44.268.674.433 1.238.711 2.853.772 4.624h3.031z">
+                                </path>
+                            </svg>
+                        </span>
+                        English
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="right-content">
+            <div class="spotify-playlist">
+                <h2>Spotify playlist</h2>
+                <div class="cardContainer">
+
+                </div>
+                <div class="playbar">
+                    <div class="seekbar">
+                        <div class="circle">
+
+                        </div>
+                    </div>
+                    <div class="abovebar">
+
+
+                        <div class="songinfo">
+
+                        </div>
+                        <div class="songbuttons">
+                            <img width="35" id="previous" src="assest/prevsong.svg" alt="">
+                            <img width="35" id="play" src="assest/play1.svg" alt="">
+                            <img width="35" id="next" src="assest/nextsong.svg" alt="">
+                        </div>
+                        <div class="timevol">
+
+
+                            <div class="songtime">
+
+                            </div>
+                            <div class="volume">
+                                <img width="25" src="assest/volume.svg" alt="">
+                                <div class="range">
+                                    <input type="range" name="volume" id="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+        </section>
+    </main>
+    <script src="JS/script.js"></script>
+</body>
+
+</html>
