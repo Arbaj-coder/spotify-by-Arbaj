@@ -65,26 +65,31 @@ function playmusic(track, pause = false) {
 
 
 async function displayAlbums() {
-    let folders = ["houseful5", "ncs"]; // <-- manually add folder names
-   
-console.log("Trying fetch in displayAlbum:");
-
+    let folderListResponse = await fetch("/songs/albums.json");
+    let folders = await folderListResponse.json(); // Now dynamic!
 
     let cardContainer = document.querySelector(".cardContainer");
+    cardContainer.innerHTML = ""; // Clear previous if any
+
     for (let folder of folders) {
-        let res = await fetch(`songs/${folder}/info.json`);
-        let data = await res.json();
-        cardContainer.innerHTML += `
-            <div data-folder="songs/${folder}" class="card">
-                <div class="play">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                        <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5" stroke-linejoin="round" />
-                    </svg>
-                </div>
-                <img src="songs/${folder}/cover.jpg" alt="">
-                <h2>${data.title}</h2>
-                <p>${data.description}</p>
-            </div>`;
+        try {
+            let res = await fetch(`/songs/${folder}/info.json`);
+            let data = await res.json();
+
+            cardContainer.innerHTML += `
+                <div data-folder="songs/${folder}" class="card">
+                    <div class="play">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <img src="/songs/${folder}/cover.jpg" alt="">
+                    <h2>${data.title}</h2>
+                    <p>${data.description}</p>
+                </div>`;
+        } catch (e) {
+            console.warn(`Could not load album in folder: ${folder}`, e);
+        }
     }
 
     document.querySelectorAll(".card").forEach(e => {
@@ -94,6 +99,7 @@ console.log("Trying fetch in displayAlbum:");
         });
     });
 }
+
 
 async function main() {
     song = await getsongs("songs/houseful5");
