@@ -65,11 +65,13 @@ function playmusic(track, pause = false) {
 
 
 async function displayAlbums() {
-    let folderListResponse = await fetch("songs/albums.json");
-    let folderList = await folderListResponse.json(); // { albums: [...] }
+    let folders = ["Aasiqi2" ,"cs" ,"houseful5" ,"ncs", "younggoat"]; // <-- manually add folder names
+   
+console.log("Trying fetch in displayAlbum:");
+
 
     let cardContainer = document.querySelector(".cardContainer");
-    for (let folder of folderList.albums) {
+    for (let folder of folders) {
         let res = await fetch(`songs/${folder}/info.json`);
         let data = await res.json();
         cardContainer.innerHTML += `
@@ -85,7 +87,6 @@ async function displayAlbums() {
             </div>`;
     }
 
-    // add click event
     document.querySelectorAll(".card").forEach(e => {
         e.addEventListener("click", async () => {
             song = await getsongs(e.dataset.folder);
@@ -93,8 +94,6 @@ async function displayAlbums() {
         });
     });
 }
-
-
 
 async function main() {
     song = await getsongs("songs/houseful5");
