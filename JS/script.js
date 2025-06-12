@@ -12,43 +12,55 @@ function secondsToMinutesSeconds(seconds) {
 async function getsongs(folder) {
     currFolder = folder;
 
-    let response = await fetch(`/${folder}/info.json`);
-    let data = await response.json();
-    let songs = data.tracks;
+    const response = await fetch(`/${folder}/info.json`);
+    if (!response.ok) {
+        console.error("Failed to fetch info.json", response.statusText);
+        return;
+    }
 
-    let songUL = document.querySelector(".songList ul");
+    const data = await response.json();
+    const songs = data.tracks;
+
+    const songUL = document.querySelector(".songList ul");
     songUL.innerHTML = "";
-    for (const songName of songs) {
+
+    for (const song of songs) {
         songUL.innerHTML += `
             <li>
                 <img class="invert" width="34" src="assest/music.svg" alt="">
                 <div class="info">
-                    <div>${songName.replaceAll("%20", " ")}</div>
+                    <div>${song.replaceAll("%20", " ")}</div>
                     <div>Arbaj</div>
                 </div>
                 <div class="playnow">
                     <span>Play Now</span>
                     <img class="invert" src="assest/play.svg" alt="">
-                </div>
+                </div> 
             </li>`;
     }
 
-    Array.from(document.querySelectorAll(".songList li")).forEach((e) => {
-        e.addEventListener('click', () => {
-            playmusic(e.querySelector(".info").firstElementChild.innerHTML);
+    // Attach click to each song item
+    Array.from(songUL.getElementsByTagName("li")).forEach((e) => {
+        e.addEventListener("click", () => {
+            const songName = e.querySelector(".info").firstElementChild.innerText;
+            playmusic(songName);
         });
     });
 
     return songs;
 }
 
-const playmusic = (track, pause = false) => {
-    currsong.src = `/${currFolder}/${track}`;
+function playmusic(track, pause = false) {
+    const encodedTrack = encodeURIComponent(track);
+    currsong.src = `/${currFolder}/${encodedTrack}`;
+
     if (!pause) currsong.play();
+
     play.src = "assest/pause.svg";
-    document.querySelector(".songinfo").innerHTML = decodeURI(track);
-    document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
+    document.querySelector(".songinfo").innerText = decodeURIComponent(track);
+    document.querySelector(".songtime").innerText = "00:00 / 00:00";
 }
+
 
 async function displayAlbums() {
     let folders = ["houseful5", "ncs"]; // <-- manually add folder names
