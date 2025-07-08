@@ -2,7 +2,7 @@ let currsong = new Audio();
 let currFolder;
 let song = [];
 
-const BASE_PATH = "/spotify-by-Arbaj";  // Add this only for GitHub Pages
+const BASE_PATH = "https://spotify-by-arbaj.onrender.com";  // Add this only for GitHub Pages
 
 
 function secondsToMinutesSeconds(seconds) {
